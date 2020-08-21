@@ -1,0 +1,118 @@
+@charset "UTF-8";
+
+body {
+  font-family: "Rubik", "PingFang TC", "Heiti", "黑體", "微軟正黑體", "Heiti TC",
+    "黑體-繁", "SF Pro TC", "SF Pro Text";
+}
+
+
+.focus1 {
+  color: $color1;
+}
+
+a:hover {
+  transition: 0.4s;
+  opacity: 0.8;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+p {
+  line-height: 170%;
+}
+
+
+.btn:disabled {
+  cursor: no-drop;
+  background-color: #999;
+}
+
+.main-content {
+  margin-top: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.origin-price {
+  font-size: 15px;
+  text-decoration: line-through;
+}
+
+.price {
+  color: red;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.add-cart {
+  width: 100%;
+  border: 1px solid $color1;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 50px;
+  transition: 0.5s;
+}
+
+.add-cart:hover {
+  transition: 0.5s;
+  background: $color1;
+  color: #fff;
+}
+
+
+.product-item {
+  margin-bottom: 50px;
+}
+
+.product-item img {
+  max-width: 100%;
+}
+
+.product-text {
+  padding: 10px 5px;
+}
+
+form {
+  max-width: 100%;
+  width: 350px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+form h3 {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.table {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.is-invalid {
+  color: red;
+}
+
+.qty {
+  max-width: 200px;
+}
