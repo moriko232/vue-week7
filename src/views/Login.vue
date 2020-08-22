@@ -17,6 +17,7 @@
                 required
                 autofocus
                 @input="clearMessage"
+                :disabled="isLoading"
               />
             </div>
             <div class="mb-2">
@@ -27,9 +28,18 @@
                 placeholder="密碼"
                 @input="clearMessage"
                 required
+                :disabled="isLoading"
               />
             </div>
-            <button class="btn btn-dark form-control" type="submit">登入</button>
+            <button class="btn btn-dark form-control" type="submit" :disabled="isLoading">
+              登入
+              <span
+                v-if="isLoading"
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+            </button>
           </form>
 
           <div v-if="errorMessage" class="alert alert-danger" role="alert">
@@ -51,6 +61,7 @@ const loginUrl = `${process.env.VUE_APP_PATH}auth/login`;
 export default {
   data() {
     return {
+      isLoading: false,
       user: {
         email: "",
         password: ""
@@ -65,25 +76,28 @@ export default {
         email: this.user.email,
         password: this.user.password
       };
+      this.isLoading = true;
 
       this.$http
         .post(loginUrl, data)
         .then(response => {
-          this.successMessage = "登入成功，請等待跳轉";
+          this.successMessage = "登入成功，請稍後...";
 
           const token = response.data.token;
           const expired = response.data.expired;
-          console.log("rea", response);
           document.cookie = `token=${token}`;
           document.cookie = `expired=${new Date(expired * 1000)}`;
-          this.$router.push({ path: "/admin/products" });
+          setTimeout(()=> {
+            this.$router.push({ path: "/admin/products" });
+          }, 2000);
+          this.isLoading = false;
         })
         .catch(err => {
           if (err) {
+            this.isLoading = false;
             this.errorMessage = "登入失敗";
             this.password = "";
           }
-          console.log("err", err);
         });
     },
     clearMessage() {

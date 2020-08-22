@@ -96,11 +96,6 @@ export default {
     this.getData();
   },
   methods: {
-    //pagenation
-    emitPages(val) {
-      console.log("nav", val);
-    },
-
     //取得資料 api
     getData(page = 1) {
       this.$parent.isLoading = true;

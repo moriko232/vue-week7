@@ -260,7 +260,6 @@ export default {
   mounted() {
     this.getDataApi();
     this.getShopCartApi();
-    console.log();
   },
   methods: {
     openMessage(msg) {
@@ -283,9 +282,6 @@ export default {
           this.isLoading = false;
           this.openMessage("已收到您的訂單!");
         })
-        .catch(function(err) {
-          console.log("err", err);
-        });
     },
     getShopCartApi() {
       this.$http
@@ -293,9 +289,6 @@ export default {
         .then(res => {
           this.shopCart = res.data.data;
         })
-        .catch(function(err) {
-          console.log("err", err);
-        });
     },
     isAlreadyInCart(id) {
       return this.shopCart.findIndex(item => {
@@ -335,9 +328,6 @@ export default {
           this.getShopCartApi();
           this.isLoading = false;
         })
-        .catch(function(err) {
-          console.log("err", err);
-        });
     },
     addToCart(item, quantity = 1) {
       this.isLoading = true;
@@ -354,9 +344,6 @@ export default {
           this.getShopCartApi();
           this.isLoading = false;
         })
-        .catch(function(err) {
-          console.log("err", err);
-        });
     },
     getDataApi() {
       this.isLoading = true;
@@ -366,9 +353,6 @@ export default {
           this.products = res.data.data;
           this.isLoading = false;
         })
-        .catch(function(err) {
-          console.log("err", err);
-        });
     }
   }
 };

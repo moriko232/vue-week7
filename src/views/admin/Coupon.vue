@@ -241,27 +241,16 @@ export default {
     this.getData();
   },
   methods: {
-    //pagenation
-    emitPages(val) {
-      console.log("nav", val);
-    },
-
     //取得資料 api
     getData(page = 1) {
       this.$parent.isLoading = true;
       const api = `${getCouponUrl}`;
       this.coupontListSettings.page = page;
-      this.$http
-        .get(api)
-        .then(response => {
-          console.log(response);
-          this.couponDatas = response.data.data;
-          this.$parent.isLoading = false;
-          this.pagination = response.data.meta.pagination;
-        })
-        .catch(err => {
-          console.log("err ", err);
-        });
+      this.$http.get(api).then(response => {
+        this.couponDatas = response.data.data;
+        this.$parent.isLoading = false;
+        this.pagination = response.data.meta.pagination;
+      });
     },
     //新增+編輯資料
     updateData() {
@@ -306,27 +295,16 @@ export default {
     apiEditData(id) {
       const url = `${editCouponUrl}/${id}`;
       this.$parent.isLoading = true;
-      this.$http
-        .patch(url, this.tempData)
-        .then(response => {
-          console.log(response);
-          this.getData();
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      this.$http.patch(url, this.tempData).then(() => {
+        this.getData();
+      });
     },
     //新增資料api
     apiAddNewData(data) {
       this.$parent.isLoading = true;
-      this.$http
-        .post(editCouponUrl, data)
-        .then(() => {
-          this.getData();
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      this.$http.post(editCouponUrl, data).then(() => {
+        this.getData();
+      });
     },
 
     deleteQA(id, title) {
@@ -351,14 +329,9 @@ export default {
       this.$parent.isLoading = true;
       //api
       const url = `${editCouponUrl}/${id}`;
-      this.$http
-        .delete(url)
-        .then(() => {
-          this.getData();
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      this.$http.delete(url).then(() => {
+        this.getData();
+      });
     }
   }
 };

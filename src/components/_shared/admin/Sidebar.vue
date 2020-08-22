@@ -11,6 +11,9 @@
       <li>
         <router-link to="coupon">折價券管理</router-link>
       </li>
+      <li>
+        <router-link to="storages">檔案管理</router-link>
+      </li>
     </nav>
 
     <!-- loading 套件 start -->

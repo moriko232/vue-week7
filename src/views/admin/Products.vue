@@ -102,7 +102,7 @@
               <form class="form-group w-100">
                 <div class="row">
                   <div class="col-sm-6">
-                    <table>
+                    <table class="w-100">
                       <tr>
                         <th width="30%">
                           產品標題
@@ -165,7 +165,7 @@
                   </div>
 
                   <div class="col-sm-6">
-                    <table>
+                    <table class="w-100">
                       <tr>
                         <th width="30%">單位</th>
                         <td width="70%">
@@ -220,17 +220,25 @@
                         alt=""
                       />
                     </div>
-                    <div>
-                      <label for="customFile">
-                        或是上傳圖片
-                      </label>
-                      <input
-                        id="customFile"
-                        ref="file"
-                        type="file"
-                        class="form-control"
-                        @change="uploadFile"
-                      />
+                    <div class="mt-3">
+                      <table class="w-100">
+                        <tr>
+                          <th width="30%">
+                            <label for="customFile">
+                              上傳圖片
+                            </label>
+                          </th>
+                          <td width="70%">
+                            <input
+                              id="customFile"
+                              ref="file"
+                              type="file"
+                              class="form-control"
+                              @change="uploadFile"
+                            />
+                          </td>
+                        </tr>
+                      </table>
                     </div>
                   </div>
                 </div>
@@ -289,16 +297,11 @@ export default {
       this.$parent.isLoading = true;
       const api = `${getProductUrl}`;
       this.productListSettings.page = page;
-      this.$http
-        .get(api, { params: this.productListSettings })
-        .then(response => {
-          this.shopDatas = response.data.data;
-          this.pagination = response.data.meta.pagination;
-          this.$parent.isLoading = false;
-        })
-        .catch(err => {
-          console.log("err ", err);
-        });
+      this.$http.get(api, { params: this.productListSettings }).then(response => {
+        this.shopDatas = response.data.data;
+        this.pagination = response.data.meta.pagination;
+        this.$parent.isLoading = false;
+      });
     },
     //新增+編輯資料
     updateData() {
@@ -331,29 +334,17 @@ export default {
     apiEditData(id) {
       this.$parent.isLoading = true;
       const url = `${baseUrl}/admin/ec/product/${id}`;
-      this.$http
-        .patch(url, this.tempData)
-        .then(response => {
-          console.log(response);
-          this.getData();
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      this.$http.patch(url, this.tempData).then(() => {
+        this.getData();
+      });
     },
     //新增資料api
     apiAddNewData(data) {
       this.$parent.isLoading = true;
       const url = `${baseUrl}/admin/ec/product`;
-      this.$http
-        .post(url, data)
-        .then(response => {
-          console.log(response);
-          this.getData();
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      this.$http.post(url, data).then(() => {
+        this.getData();
+      });
     },
 
     deleteQA(id, title) {
@@ -378,15 +369,9 @@ export default {
       this.$parent.isLoading = true;
       //api
       const url = `${baseUrl}/admin/ec/product/${id}`;
-      this.$http
-        .delete(url)
-        .then(function(response) {
-          console.log(response);
-          this.getData();
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      this.$http.delete(url).then(() => {
+        this.getData();
+      });
     },
     //上傳
     uploadFile() {

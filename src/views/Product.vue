@@ -59,9 +59,6 @@ export default {
           this.item = res.data.data;
           this.isLoading = false;
         })
-        .catch(function(err) {
-          console.log("err", err);
-        });
     }
   }
 };
